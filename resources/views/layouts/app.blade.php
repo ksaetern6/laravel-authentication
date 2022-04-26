@@ -17,18 +17,25 @@
                 </li>
             </ul>
             <ul class="flex items-center">
-                <li>
-                    <a href="" class="p-3">Login</a>
-                </li>
-                <li>
-                    <a href="{{ route('register') }}" class="p-3">Register</a>
-                </li>
-                <li>
-                    <a href="" class="p-3">Name Here</a>
-                </li>
-                <li>
-                    <a href="" class="p-3">Logout</a>
-                </li>
+                @auth
+                    <li>
+                        <a href="" class="p-3">{{ auth()->user()->name }}</a>
+                    </li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST" class="p-3 inline">
+                            @csrf
+                            <button class="submit">Logout</button>
+                        </form>
+                    </li>
+                @endauth
+                @guest
+                    <li>
+                        <a href="{{ route('login') }}" class="p-3">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register') }}" class="p-3">Register</a>
+                    </li>
+                @endguest
             </ul>
         </nav>
         <div class="container mx-auto mt-6 px-6">
